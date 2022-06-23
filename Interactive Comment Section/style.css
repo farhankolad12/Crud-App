@@ -253,10 +253,6 @@ img {
   display: none !important;
 }
 
-.mobile {
-  display: none;
-}
-
 .border-left {
   position: absolute;
   left: 7%;
