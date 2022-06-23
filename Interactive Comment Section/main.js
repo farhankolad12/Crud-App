@@ -94,6 +94,7 @@ const replyToComment = () => {
   const replyImg = document.querySelectorAll("#reply");
   replyImg.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      btn.setAttribute("disabled", "disabled");
       const commentContainer =
         e.target.parentElement.parentElement.parentElement;
       console.log(commentContainer);
@@ -145,6 +146,7 @@ const replyToComment = () => {
         insertAfter(doc, commentContainer);
         deleteComment();
         editComment();
+        btn.removeAttribute("disabled");
       });
     });
   });
@@ -188,10 +190,13 @@ const postComment = () => {
       document
         .querySelector("main")
         .insertBefore(doc, document.querySelector("main").firstElementChild);
-      textareaContainer.value = "";
       deleteComment();
       editComment();
-      voteComment();
+      /*       const local = JSON.parse(localStorage.getItem("data"));
+      postDatas.content = textareaContainer.value;
+      local.comments.push(postDatas);
+      localStorage.setItem("data", JSON.stringify(local)); */
+      textareaContainer.value = "";
     }
   });
 };
@@ -333,6 +338,7 @@ const getData = async () => {
   deleteComment();
   postComment();
   replyToComment();
+  voteComment();
   editComment();
 };
 
@@ -389,7 +395,6 @@ const postCommentM = () => {
         .querySelector(".mobile")
         .insertBefore(doc, document.querySelector(".mobile").firstElementChild);
       textareaContainer.value = "";
-      voteCommentM();
       editCommentM();
       deleteCommentM();
     }
@@ -521,11 +526,11 @@ const mobileFunc = async () => {
   </div>
   </div>`;
   document.querySelector(".mobile").innerHTML = output;
-  voteCommentM();
   deleteCommentM();
   postCommentM();
   editCommentM();
   replyToCommentM();
+  voteCommentM();
 };
 
 const getRepliesM = (replies, currentUser) => {
@@ -708,7 +713,6 @@ const editCommentM = () => {
             </div>
             </div>`;
           deleteCommentM();
-          voteCommentM();
         }
       });
     });
